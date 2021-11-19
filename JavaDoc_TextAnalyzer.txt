@@ -1,0 +1,50 @@
+import java.io.*;
+import java.io.BufferedReader;    
+import java.io.FileReader;    
+import java.util.ArrayList;    
+import java.util.*;
+
+   /** *This is a program for calculating word occurrences *@param args */ 
+      
+   *@authod Tyro Beatty 
+   *@Date: Nov 17, 2021
+   *@Valencia College
+   *@Software Development I, CEN3024C
+   *@Dr. Lisa Macon
+   **/
+
+public class Analyzer { 
+	public static void main(String[] args) throws IOException {   /** * This is the main method which is the starting point of this * code execution */ 
+		
+	String line, word = "";    
+	int count = 0, maxCount = 0;    
+	ArrayList<String> words = new ArrayList<String>();    
+	
+	
+	FileReader file = new FileReader("C:\\Users\\studi\\Documents\\Valencia\\Software Development I\\The Raven.txt");    
+	BufferedReader br = new BufferedReader(file);    
+
+    /** * This is a helper method which actually builds word occurrence map * @param Raven */ 
+	  String line1;
+      Map<String, Long> counts = new HashMap<>();
+      while ((line1 = br.readLine()) != null) {
+          
+    	  
+          String[] words1 = line1.split("[\\s.;,?:!()\"]+");   /** * This method is used to sort the wordMap is descending order * @param wordMap */ 
+          for (String word1 : words1) {
+              word1 = word1.trim();
+              if (word1.length() > 0) {
+                  if (counts.containsKey(word1)) {
+                      counts.put(word1, counts.get(word1) + 1);
+                  } else {
+                      counts.put(word1, 1L);
+                  }
+              }
+          }
+      }
+      for (Map.Entry<String, Long> entry : counts.entrySet()) {
+          System.out.println(entry.getKey() + " : " + entry.getValue());
+      }
+      br.close();
+  }
+}
